@@ -2,10 +2,14 @@ import numpy as np
 from matplotlib import pyplot, transforms
 from image_extract import get_obstacle
 
+# TODO: Add gif making capabilites
+# TODO: Relative obstacle based on simulation dimensions
+# TODO: Ad sac à Merde's laces model
 def distance(x1, y1, x2, y2):
     return np.sqrt((x2-x1)**2 + (y2-y1)**2)
 
 plot_every = 50
+frames = []
 
 def main():
     # define variables
@@ -29,10 +33,11 @@ def main():
     # assigning right velocity
     F[:, :, 3] = 2.5 # checked
 
-    # defining geometry
+    # creating obstacle
+    # start by making an new array with the same dimimentions as our simulation
     cylinder = np.full((Ny, Nx), False) # if the value is false = empty space, else it's an obstacle
-    nest = get_obstacle()
-    y_offset = Nx - nest.shape[1]
+    nest = get_obstacle() # return as np array containing either true of false
+    y_offset = Nx - nest.shape[1] # 
     for x in range(nest.shape[0]):
         for y in range(nest.shape[1]):
             cylinder[x+57][y+20] = nest[x][y]
@@ -73,7 +78,10 @@ def main():
         if (it%plot_every == 0):
             base = pyplot.gca().transData
             rot = transforms.Affine2D().rotate_deg(180)
-            pyplot.contour(np.sqrt(ux**2 + uy**2), transform= rot + base)
+            CS = pyplot.contour(np.sqrt(ux**2 + uy**2), transform= rot + base)
+            
+            pyplot.clabel(CS, inline=True, fontsize=10)
+
             pyplot.gca().set_aspect('equal')
             pyplot.pause(0.01)
             pyplot.clf()
