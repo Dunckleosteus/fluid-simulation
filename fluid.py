@@ -1,5 +1,6 @@
 import numpy as np
 from matplotlib import pyplot
+from image_extract import get_obstacle
 
 def distance(x1, y1, x2, y2):
     return np.sqrt((x2-x1)**2 + (y2-y1)**2)
@@ -35,6 +36,12 @@ def main():
         for x in range(0, Nx):
             if(distance(Nx//4, Ny//2, x, y)<20):
                 cylinder[y][x] = True
+   
+    x_offset = 10
+    y_offset = 20
+    for y in range(0, 10):
+        for x in range(0, 20): 
+            cylinder[y+y_offset][x+x_offset] = True
 
     # main loop
     for it in range(Nt):
