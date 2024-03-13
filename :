@@ -12,7 +12,7 @@ def main():
     Nx = 400 # width of the simulation
     Ny = 80 # height of the simulation
     tau = .53 # kinematic viscosity
-    Nt = 5000 # iterations through time
+    Nt = 4000 # iterations through time
 
     # lattice speeds ands weights
     # defining discrete velocity
@@ -27,7 +27,7 @@ def main():
     ## Adding slight inconsistencies (mesoscopic velocity)
     F = np.ones((Ny, Nx, NL)) + .01 * np.random.randn(Ny, Nx, NL) # checked
     # assigning right velocity
-    F[:, :, 3] = 2.5 # checked
+    F[:, :, 3] = 2.3 # checked
 
     # defining geometry
     cylinder = np.full((Ny, Nx), False) # if the value is false = empty space, else it's an obstacle
