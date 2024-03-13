@@ -31,18 +31,11 @@ def main():
 
     # defining geometry
     cylinder = np.full((Ny, Nx), False) # if the value is false = empty space, else it's an obstacle
-
-    for y in range(0, Ny): # checked
-        for x in range(0, Nx):
-            if(distance(Nx//4, Ny//2, x, y)<20):
-                cylinder[y][x] = True
-   
-    x_offset = 10
-    y_offset = 20
-    for y in range(0, 10):
-        for x in range(0, 20): 
-            cylinder[y+y_offset][x+x_offset] = True
-
+    nest = get_obstacle()
+    y_offset = Ny - nest.shape[1]
+    for x in range(nest.shape[0]):
+        for y in range(nest.shape[1]):
+            cylinder[x+70][y+0] = nest[x][y]
     # main loop
     for it in range(Nt):
         print(it)
@@ -78,7 +71,7 @@ def main():
         F = F + -(1/tau) * (F-Feq)
     
         if (it%plot_every == 0):
-            pyplot.imshow(np.sqrt(ux**2 + uy**2))
+            pyplot.contour(np.sqrt(ux**2 + uy**2))
             pyplot.pause(0.01)
             pyplot.cla
 
