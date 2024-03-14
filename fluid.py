@@ -37,8 +37,7 @@ def main():
     # start by making an new array with the same dimimentions as our simulation
     cylinder = np.full((Ny, Nx), False) # if the value is false = empty space, else it's an obstacle
     nest = get_obstacle() # return as np array containing either true of false
-    y_offset = Nx - nest.shape[1] # 
-    for x in range(nest.shape[0]):
+   for x in range(nest.shape[0]):
         for y in range(nest.shape[1]):
             cylinder[x+57][y+20] = nest[x][y]
     # main loop
@@ -84,7 +83,8 @@ def main():
 
             pyplot.gca().set_aspect('equal')
             pyplot.pause(0.01)
-            pyplot.clf()
+            pyplot.clf()  y_offset = Nx - nest.shape[1] # 
+   
 
 if __name__ == "__main__":
     main()
