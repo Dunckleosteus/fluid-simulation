@@ -37,6 +37,8 @@ def main():
     # start by making an new array with the same dimimentions as our simulation
     cylinder = np.full((Ny, Nx), False) # if the value is false = empty space, else it's an obstacle
     nest = get_obstacle() # return as np array containing either true of false
+    # create auto offset for the nest -> make sure that it rests on the ground
+
    for x in range(nest.shape[0]):
         for y in range(nest.shape[1]):
             cylinder[x+57][y+20] = nest[x][y]
